@@ -1,0 +1,143 @@
+:root {
+    color-scheme: dark;
+    --border-color: #ccc;
+    --active-color: green;
+    --unread-color: orange;
+    --modal-backgound: rgba(26, 26, 26, 0.664);
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    color: var(--border-color)
+}
+
+*:focus {
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+.container {
+    height: calc(100% - 68px);
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 0.5fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "left center right"
+}
+
+.top {
+    height: 30px;
+    border: 1px solid var(--border-color);
+}
+
+.left {
+    grid-area: left;
+    border-left: 1px solid var(--border-color);
+    padding: 4px;
+    overflow-y: auto;
+}
+
+.right {
+    grid-area: right;
+    border-right: 1px solid var(--border-color);
+    padding: 4px;
+    overflow-y: auto;
+}
+
+.center {
+    grid-area: center;
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.messages {
+    overflow-y: auto;
+    height: 99%;
+    padding: 4px;
+}
+
+.bottom {
+    height: 30px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.send_area {
+    float: left;
+    width: calc(100% - 44px);
+    height: 30px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    /* You can adjust the color and thickness of the outline */
+}
+
+.send_button {
+    float: left;
+    border: none;
+    outline: none;
+
+    width: 40px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.send_button:hover {
+    opacity: 0.8;
+}
+
+.user_item,
+.room_item {
+    cursor: pointer;
+}
+
+.modal_content {
+    position: absolute;
+    padding: 10px;
+    left: 0px;
+    z-index: 2;
+    border: 1px solid var(--border-color);
+    background-color: var(--modal-backgound);
+}
+
+.modal {
+    display: none;
+}
+
+.modal_background {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: var(--modal-backgound);
+    z-index: 1;
+}
+
+.menu_button {
+    margin-right: -3px;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0px;
+    border: none;
+}
+
+.menu_button:hover {
+    opacity: 0.8;
+}
+
+.room_item {
+    overflow: hidden;
+    font-size: 20px;
+}
+
+.room_item:hover {
+    opacity: 0.8;
+}
