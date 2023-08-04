@@ -161,7 +161,6 @@ new class {
         el.scrollTop = el.scrollHeight
     }
     send_message() {
-        alert("send msg")
         let msg = document.querySelector('.send_area').value.trim()
         if (!msg) return
         if (msg.charAt(0) === '/') {
