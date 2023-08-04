@@ -7,6 +7,10 @@
     --brownish: #47360b;
 }
 
+::placeholder {
+    color: var(--light-brownish);
+}
+
 html,
 body {
     background-color: var(--dark-brownish);
