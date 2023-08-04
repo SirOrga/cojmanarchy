@@ -4,10 +4,12 @@
     --active-color: #a4bbe0;
     --unread-color: #d1d687;
     --modal-backgound: #140d33;
+    --chat-backgound: #140d33;
 }
 
 html,
 body {
+    background-color: var(--chat-backgound);
     height: 100%;
     margin: 0;
     color: var(--border-color);
