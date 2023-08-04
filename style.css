@@ -1,8 +1,8 @@
 :root {
     color-scheme: dark;
     --border-color: #ccc;
-    --active-color: green;
-    --unread-color: orange;
+    --active-color: #a4bbe0;
+    --unread-color: #d1d687;
     --modal-backgound: rgba(26, 26, 26, 0.664);
 }
 
