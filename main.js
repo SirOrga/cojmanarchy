@@ -101,7 +101,7 @@ new class {
         document.querySelector('.right').innerHTML = ''
 
         this.room = this.ws.rooms.get(Array.from(this.ws.rooms.values()).slice(-1)[0]?.name)
-        if (this.room) document.querySelector(`#room-${this.room.name}`).querySelector('.name').style.color = "var(--active-color)"
+        if (this.room) document.querySelector(`#room-${this.room.name}`).querySelector('.name').style.color = "var(--blueish)"
         this.render_users()
         this.render_messages()
     }
@@ -113,7 +113,7 @@ new class {
             else {
                 let r = document.querySelector(`#room-${this.format_id(room.name)}`)?.querySelector('.name')
                 room.unread = true
-                if (r) r.style.color = "var(--unread-color)"
+                if (r) r.style.color = "var(--orangish)"
             }
             if (this.background) {
                 clearInterval(this.blink_title)
@@ -139,14 +139,14 @@ new class {
             room.unread = false
             let old_room = document.querySelector(`#room-${this.format_id(this.room?.name)}`)
             if (old_room) old_room.querySelector('.name').style.color = "var(--border-color)"
-            item.querySelector('.name').style.color = "var(--active-color)"
+            item.querySelector('.name').style.color = "var(--blueish)"
             this.room = room
             this.render_users()
             this.render_messages()
         }
         item.querySelector('.close').onclick = () => this.ws.signal('leave', room.name)
-        if (room.name === this.room?.name) item.querySelector('.name').style.color = "var(--active-color)"
-        else if (room.unread) item.querySelector('.name').style.color = "var(--unread-color)"
+        if (room.name === this.room?.name) item.querySelector('.name').style.color = "var(--blueish)"
+        else if (room.unread) item.querySelector('.name').style.color = "var(--orangish)"
     }
     render_messages() {
         document.querySelector('.send_area').focus()
@@ -189,7 +189,7 @@ new class {
         let item = this.template_item('#user_item', '.right')
         item.id = `user-${user.id}`
         item.querySelector('.name').innerHTML = user.nick
-        if (user.id === this.my_data.id) item.querySelector('.name').style.color = "var(--active-color)"
+        if (user.id === this.my_data.id) item.querySelector('.name').style.color = "var(--blueish)"
     }
     render_rooms() {
         document.querySelector('.left').innerHTML = ''
