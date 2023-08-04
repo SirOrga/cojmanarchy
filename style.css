@@ -75,7 +75,7 @@ button {
 }
 
 .send_area {
-    background-color: #140d33;
+    background-color: var(--brownish);
     float: left;
     width: calc(100% - 44px);
     height: 30px;
