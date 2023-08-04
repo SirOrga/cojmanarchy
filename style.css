@@ -1,18 +1,18 @@
 :root {
     color-scheme: dark;
-    --border-color: #ccc;
-    --active-color: #a4bbe0;
-    --unread-color: #d1d687;
-    --modal-backgound: #0c0820;
-    --chat-backgound: #0c0820;
+    --orangish: #ac4109;
+    --light-brownish: #ac4109;
+    --blueish: #6e8453;
+    --dark-brownish: #1b1203;
+    --brownish: #47360b;
 }
 
 html,
 body {
-    background-color: var(--chat-backgound);
+    background-color: var(--dark-brownish);
     height: 100%;
     margin: 0;
-    color: var(--border-color);
+    color: var(--light-brownish);
     font-family: "Courier New", monospace;
 }
 
@@ -37,27 +37,27 @@ button {
 
 .top {
     height: 30px;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--light-brownish);
 }
 
 .left {
     grid-area: left;
-    border-left: 1px solid var(--border-color);
+    border-left: 1px solid var(--light-brownish);
     padding: 4px;
     overflow-y: auto;
 }
 
 .right {
     grid-area: right;
-    border-right: 1px solid var(--border-color);
+    border-right: 1px solid var(--light-brownish);
     padding: 4px;
     overflow-y: auto;
 }
 
 .center {
     grid-area: center;
-    border-left: 1px solid var(--border-color);
-    border-right: 1px solid var(--border-color);
+    border-left: 1px solid var(--light-brownish);
+    border-right: 1px solid var(--light-brownish);
     overflow: hidden;
 }
 
@@ -71,7 +71,7 @@ button {
 .bottom {
     height: 30px;
     overflow: hidden;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--light-brownish);
 }
 
 .send_area {
@@ -109,8 +109,8 @@ button {
     padding: 10px;
     left: 0px;
     z-index: 2;
-    border: 1px solid var(--border-color);
-    background-color: var(--modal-backgound);
+    border: 1px solid var(--light-brownish);
+    background-color: var(--dark-brownish);
 }
 
 .modal {
@@ -123,7 +123,7 @@ button {
     top: 0px;
     right: 0px;
     bottom: 0px;
-    background-color: var(--modal-backgound);
+    background-color: var(--dark-brownish);
     z-index: 1;
 }
 
