@@ -62,7 +62,7 @@ button {
 }
 
 .messages {
-    border-color: #a4bbe0;
+    border-color: --light-brownish;
     overflow-y: auto;
     height: 99%;
     padding: 4px;
