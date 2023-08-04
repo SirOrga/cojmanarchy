@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat v2</title>
+<script src="https://ws.emupedia.net:3001/mediasoupclient.min.js"></script>
+<script src="https://ws.emupedia.net:3001/socket.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <template id="settings_modal">
+        Nick <input type="text" class="nick" maxlength="30">
+    </template>
+    <template id="join_room_modal">
+        room <input type="text" class="room_name" maxlength="30">
+        <button class="join">join</button>
+    </template>
+
+    <template id="user_item">
+        <div class="name"></div>
+    </template>
+
+    <template id="room_item">
+        <div class="name" style="float: left;"></div>
+        <div class="close" style="float: right;">
+            <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path
+                        d="M8.00191 9.41621C7.61138 9.02569 7.61138 8.39252 8.00191 8.002C8.39243 7.61147 9.0256 7.61147 9.41612 8.002L12.0057 10.5916L14.5896 8.00771C14.9801 7.61719 15.6133 7.61719 16.0038 8.00771C16.3943 8.39824 16.3943 9.0314 16.0038 9.42193L13.4199 12.0058L16.0039 14.5897C16.3944 14.9803 16.3944 15.6134 16.0039 16.004C15.6133 16.3945 14.9802 16.3945 14.5896 16.004L12.0057 13.42L9.42192 16.0038C9.03139 16.3943 8.39823 16.3943 8.00771 16.0038C7.61718 15.6133 7.61718 14.9801 8.00771 14.5896L10.5915 12.0058L8.00191 9.41621Z"
+                        fill="var(--border-color)"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M23 4C23 2.34315 21.6569 1 20 1H4C2.34315 1 1 2.34315 1 4V20C1 21.6569 2.34315 23 4 23H20C21.6569 23 23 21.6569 23 20V4ZM21 4C21 3.44772 20.5523 3 20 3H4C3.44772 3 3 3.44772 3 4V20C3 20.5523 3.44772 21 4 21H20C20.5523 21 21 20.5523 21 20V4Z"
+                        fill="var(--border-color)"></path>
+                </g>
+            </svg>
+        </div>
+    </template>
+
+    <template id="message_item">
+        <div class="message"></div>
+    </template>
+
+    <div class="top">
+        <button class="menu_button" data-target="settings">
+            <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M14.2788 2.15224C13.9085 2 13.439 2 12.5 2C11.561 2 11.0915 2 10.7212 2.15224C10.2274 2.35523 9.83509 2.74458 9.63056 3.23463C9.53719 3.45834 9.50065 3.7185 9.48635 4.09799C9.46534 4.65568 9.17716 5.17189 8.69017 5.45093C8.20318 5.72996 7.60864 5.71954 7.11149 5.45876C6.77318 5.2813 6.52789 5.18262 6.28599 5.15102C5.75609 5.08178 5.22018 5.22429 4.79616 5.5472C4.47814 5.78938 4.24339 6.1929 3.7739 6.99993C3.30441 7.80697 3.06967 8.21048 3.01735 8.60491C2.94758 9.1308 3.09118 9.66266 3.41655 10.0835C3.56506 10.2756 3.77377 10.437 4.0977 10.639C4.57391 10.936 4.88032 11.4419 4.88029 12C4.88026 12.5581 4.57386 13.0639 4.0977 13.3608C3.77372 13.5629 3.56497 13.7244 3.41645 13.9165C3.09108 14.3373 2.94749 14.8691 3.01725 15.395C3.06957 15.7894 3.30432 16.193 3.7738 17C4.24329 17.807 4.47804 18.2106 4.79606 18.4527C5.22008 18.7756 5.75599 18.9181 6.28589 18.8489C6.52778 18.8173 6.77305 18.7186 7.11133 18.5412C7.60852 18.2804 8.2031 18.27 8.69012 18.549C9.17714 18.8281 9.46533 19.3443 9.48635 19.9021C9.50065 20.2815 9.53719 20.5417 9.63056 20.7654C9.83509 21.2554 10.2274 21.6448 10.7212 21.8478C11.0915 22 11.561 22 12.5 22C13.439 22 13.9085 22 14.2788 21.8478C14.7726 21.6448 15.1649 21.2554 15.3694 20.7654C15.4628 20.5417 15.4994 20.2815 15.5137 19.902C15.5347 19.3443 15.8228 18.8281 16.3098 18.549C16.7968 18.2699 17.3914 18.2804 17.8886 18.5412C18.2269 18.7186 18.4721 18.8172 18.714 18.8488C19.2439 18.9181 19.7798 18.7756 20.2038 18.4527C20.5219 18.2105 20.7566 17.807 21.2261 16.9999C21.6956 16.1929 21.9303 15.7894 21.9827 15.395C22.0524 14.8691 21.9088 14.3372 21.5835 13.9164C21.4349 13.7243 21.2262 13.5628 20.9022 13.3608C20.4261 13.0639 20.1197 12.558 20.1197 11.9999C20.1197 11.4418 20.4261 10.9361 20.9022 10.6392C21.2263 10.4371 21.435 10.2757 21.5836 10.0835C21.9089 9.66273 22.0525 9.13087 21.9828 8.60497C21.9304 8.21055 21.6957 7.80703 21.2262 7C20.7567 6.19297 20.522 5.78945 20.2039 5.54727C19.7799 5.22436 19.244 5.08185 18.7141 5.15109C18.4722 5.18269 18.2269 5.28136 17.8887 5.4588C17.3915 5.71959 16.7969 5.73002 16.3099 5.45096C15.8229 5.17191 15.5347 4.65566 15.5136 4.09794C15.4993 3.71848 15.4628 3.45833 15.3694 3.23463C15.1649 2.74458 14.7726 2.35523 14.2788 2.15224ZM12.5 15C14.1695 15 15.5228 13.6569 15.5228 12C15.5228 10.3431 14.1695 9 12.5 9C10.8305 9 9.47716 10.3431 9.47716 12C9.47716 13.6569 10.8305 15 12.5 15Z"
+                        fill="var(--border-color)"></path>
+                </g>
+            </svg>
+        </button>
+
+        <button class="menu_button" data-target="join_room">
+            <svg fill="#000000" width="24px" height="24px" viewBox="0 0 32 32" id="Outlined"
+                xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <title></title>
+                    <g id="Fill">
+                        <circle fill="var(--border-color)" cx="8" cy="7" r="1"></circle>
+                        <circle fill="var(--border-color)" cx="11" cy="7" r="1"></circle>
+                        <circle fill="var(--border-color)" cx="14" cy="7" r="1"></circle>
+                        <polygon fill="var(--border-color)"
+                            points="15 24 17 24 17 20 21 20 21 18 17 18 17 14 15 14 15 18 11 18 11 20 15 20 15 24">
+                        </polygon>
+                        <path fill="var(--border-color)"
+                            d="M26,3H6A3,3,0,0,0,3,6V29H29V6A3,3,0,0,0,26,3Zm1,24H5V11H27ZM5,9V6A1,1,0,0,1,6,5H26a1,1,0,0,1,1,1V9Z">
+                        </path>
+                    </g>
+                </g>
+            </svg>
+        </button>
+
+    </div>
+    <div class="container">
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="center">
+            <div class='modal'>
+                <div class="modal_background"></div>
+                <div class="modal_content"></div>
+            </div>
+            <div class="messages"></div>
+        </div>
+    </div>
+    <div class="bottom">
+        <input type="text" class="send_area">
+        <button class="send_button">
+            <svg height="20px" width="20px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#ccc"
+                stroke="#ccc">
+
+                <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+
+                <g id="SVGRepo_iconCarrier">
+                    <style type="text/css">
+                        .st0 {
+                            fill: var(--border-color);
+                        }
+                    </style>
+                    <g>
+                        <path class="st0"
+                            d="M0,218.241l20.913,15.158l118.904,86.199v132.866l103.404-57.892l92.52,67.064L512,50.363L0,218.241z M57.326,227.202L442.817,100.81L156.609,299.193L57.326,227.202z M166.202,407.459v-68.74l53.494,38.786L166.202,407.459z M324.494,420.906L172.776,310.92L455.69,114.808L324.494,420.906z" />
+                    </g>
+                </g>
+
+            </svg>
+        </button>
+    </div>
+    <script src="main.js"></script>
+
+</body>
+
+</html>

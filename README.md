@@ -1,2 +1,0 @@
-# cojmanarchy
-Client for Cojmar
