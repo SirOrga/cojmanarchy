@@ -59,6 +59,7 @@ button {
 }
 
 .messages {
+    color: #a4bbe0;
     overflow-y: auto;
     height: 99%;
     padding: 4px;
